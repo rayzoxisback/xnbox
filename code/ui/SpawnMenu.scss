@@ -11,15 +11,16 @@
     position: absolute;
     font-family: poppins;
     opacity: 0;
-
     .tabs {
         font-size: 16px;
         flex-shrink: 0;
         margin-bottom: 4px;
         padding-left: 10px;
-
         button {
-            padding: 6px 5px;
+            border-radius: 5px 5px 0 0;
+            background-color: rgba( #01cdfe, 0.2);
+            padding: 6px 10px;
+            margin-bottom: -4px;
             margin-right: 10px;
             font-size: 13px;
             align-items: center;
@@ -29,15 +30,15 @@
             cursor: pointer;
             //border-radius: 5px;
             label {
-                text-shadow: 1px 1px 4px rgba( black, 0.2 );
+                text-shadow: 1px 1px 4px rgba( black, 0.2);
             }
-
             &:hover {
+                background-color: rgba( #b967ff, 0.2);
                 opacity: 1;
             }
-
             &.active {
-                transform: scale( 1 );
+                background-color: rgba( #b967ff, 0.2);
+                transform: scale( 1);
                 opacity: 1;
                 color: #fff;
                 //	background-color: #fff;//( #3273eb, 0.2 );
@@ -45,21 +46,18 @@
             }
         }
     }
-
     .left {
         flex-grow: 1;
         flex-direction: column;
         position: relative;
         left: -500px;
         transition: all 0.3s ease-in;
-
         .body {
             border-radius: 10px;
-            background-color: rgba( #111, 0.7 );
+            background-color: rgba( #01cdfe, 0.2);
             flex-grow: 1;
         }
     }
-
     .right {
         margin-left: 10px;
         flex-direction: column;
@@ -67,38 +65,31 @@
         flex-shrink: 0;
         left: 500px;
         transition: all 0.3s ease-in;
-
         .body {
             //	background-color: rgba( #333, 0.95 );
             flex-grow: 1;
             border-radius: 10px;
-            background-color: rgba( #111, 0.7 );
+            background-color: rgba( #01cdfe, 0.2);
             padding: 10px;
-
-
             .toollist {
                 flex-direction: column;
                 width: 150px;
                 color: #aaa;
-
                 button {
                     padding: 3px 10px;
-                    font-size: 11px;
+                    font-size: 20px;
                     transition: all 0.2s ease-out;
                     cursor: pointer;
-
                     &:hover {
                         //border-left: 3px solid #3273eb;
                         color: white;
                     }
-
                     &.active {
                         //border-left: 5px solid #3273eb;
                         color: white;
                     }
                 }
             }
-
             .inspector {
                 //background-color: rgba( #111, 0.7 );
                 flex-grow: 1;
@@ -109,14 +100,13 @@
     }
 }
 
-
 .spawnmenuopen spawnmenu {
     transition: all 0.2s ease-out;
     pointer-events: all;
     opacity: 1;
-    transform: scale( 1 );
-
-    .left, .right {
+    transform: scale( 1);
+    .left,
+    .right {
         left: 0;
         transition: all 0.1s ease-out;
     }
@@ -124,12 +114,10 @@
 
 .spawnpage {
     display: none;
-
     &.active {
         display: flex;
         opacity: 1;
     }
-
     .canvas {
         overflow: scroll;
         width: 100%;
@@ -138,14 +126,12 @@
         justify-content: space-between;
         margin: 10px;
         border-radius: 5px;
-
         .cell {
             padding: 5px;
         }
-
         .icon {
             border-radius: 16px;
-            color: rgba( #fff, 0.5 );
+            color: rgba( #fff, 0.5);
             font-size: 12px;
             text-align: center;
             cursor: pointer;
@@ -154,8 +140,7 @@
             background-position: center;
             background-size: cover;
             background-color: rgba(black, 0.1);
-            background-image: url( /entity/spawnicon.png );
-
+            background-image: url(/entity/spawnicon.png );
             label {
                 font-size: 9px;
                 position: absolute;
@@ -164,14 +149,11 @@
                 right: 0;
                 pointer-events: none;
             }
-
             &:hover {
                 color: #fff;
                 background-color: rgba(black, 0.4);
             }
-
-            &:active {
-            }
+            &:active {}
         }
     }
 }
