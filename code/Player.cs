@@ -1,7 +1,18 @@
-﻿using Sandbox;
+﻿using System.Threading.Tasks;
+using Sandbox;
+using Sandbox.UI;
 
 partial class SandboxPlayer : Player
 {
+	[Net] public float Armor { get; set; }
+	[Net] public bool BuildMode { get; set; }
+	[Net] public bool ModeLock { get; set; }
+	[Net] public float Speed { get; set; }
+  [Net] public bool GodMode { get; set; }
+
+	[Net] public bool IsStopped { get; set; }
+	[Net] public bool IsWalk { get; set; }
+
 	private TimeSince timeSinceDropped;
 	private TimeSince timeSinceJumpReleased;
 
@@ -22,15 +33,25 @@ partial class SandboxPlayer : Player
 
 	public override void Spawn()
 	{
+		ModeLock = false;
+		BuildMode = true;
 		MainCamera = new FirstPersonCamera();
 		LastCamera = MainCamera;
-
 		base.Spawn();
+	}
+
+	public async void TempLockMode()
+	{
+		ModeLock = true;
+		await Task.Delay(20000);
+		ModeLock = false;
 	}
 
 	public override void Respawn()
 	{
 		SetModel( "models/citizen/citizen.vmdl" );
+
+		Armor = 50;
 
 		Controller = new WalkController();
 		Animator = new StandardPlayerAnimator();
@@ -50,11 +71,21 @@ partial class SandboxPlayer : Player
 
 		Dress();
 
-		Inventory.Add( new PhysGun(), true );
-		Inventory.Add( new GravGun() );
-		Inventory.Add( new Tool() );
-		Inventory.Add( new Pistol() );
+		Inventory.DeleteContents();
 		Inventory.Add( new Flashlight() );
+		
+		if(BuildMode)
+		{
+			GodMode = true;
+			Inventory.Add( new GravGun() );
+			Inventory.Add( new Tool() );
+			Inventory.Add( new PhysGun(), true );
+		}else{
+			GodMode = false;
+			Inventory.Add( new SMG());
+			Inventory.Add( new Shotgun());
+			Inventory.Add( new Pistol(), true );
+		}
 
 		base.Respawn();
 	}
@@ -90,6 +121,7 @@ partial class SandboxPlayer : Player
 
 	public override void TakeDamage( DamageInfo info )
 	{
+		if ( GodMode ) return;
 		if ( GetHitboxGroup( info.HitboxIndex ) == 1 )
 		{
 			info.Damage *= 10.0f;
@@ -132,6 +164,15 @@ partial class SandboxPlayer : Player
 	public override void Simulate( Client cl )
 	{
 		base.Simulate( cl );
+
+
+		if ( IsServer ) 
+		{
+			var tspeed = ((Velocity.Length / 100) * 1.60934);
+			Speed = (float)tspeed;
+			IsStopped = tspeed == 0 ? true : false;
+			IsWalk = IsStopped ? false : (tspeed > 4 ? false : true);
+		}
 
 		if ( Input.ActiveChild != null )
 		{
@@ -225,6 +266,30 @@ partial class SandboxPlayer : Player
 
 			break;
 		}
+	}
+
+	[ServerCmd( "pvp_mode" )]
+
+		public static void SetPVPMode()
+	{
+		var target = ConsoleSystem.Caller.Pawn as SandboxPlayer;
+		if ( target == null || (!target.BuildMode) ) return;
+		if ( target.ModeLock ) return;
+		target.BuildMode = false;
+		target.TempLockMode();
+		target.Respawn();
+	}
+
+	[ServerCmd( "build_mode" )]
+
+		public static void SetBUILDMode()
+	{
+		var target = ConsoleSystem.Caller.Pawn as SandboxPlayer;
+		if ( target == null || target.BuildMode ) return;
+		if ( target.ModeLock ) return;
+		target.BuildMode = true;
+		target.TempLockMode();
+		target.Respawn();
 	}
 
 	// TODO

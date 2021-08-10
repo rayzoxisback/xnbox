@@ -4,6 +4,23 @@ Health {
     position: absolute;
     background-color: rgba( #01cdfe, 0.3);
     left: 10px;
+    bottom: 100px;
+    font-size: 40px;
+    width: 190px;
+    font-weight: bold;
+    color: white;
+    height: 80px;
+    padding: 0 20px;
+    align-items: center;
+}
+
+Armor {
+    border-radius: 10px;
+    font-family: poppins;
+    position: absolute;
+    background-color: rgba( #b967ff, 0.3);
+    left: 10px;
+    width: 190px;
     bottom: 10px;
     font-size: 40px;
     font-weight: bold;
@@ -11,6 +28,50 @@ Health {
     height: 80px;
     padding: 0 20px;
     align-items: center;
+}
+
+PlayMode {
+    border-radius: 10px;
+    font-family: poppins;
+    position: absolute;
+    background-color: rgba( #01cdfe, 0.3);
+    left: 210px;
+    bottom: 10px;
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    height: 80px;
+    padding: 0 20px;
+    align-items: center;
+}
+
+Speed {
+    font-family: poppins;
+    font-size: 40px;
+    border-radius: 10px;
+    background-color: rgba( #b967ff, 0.4);
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    height: 80px;
+    width: 270px;
+    padding: 0 20px;
+    align-items: center;
+    background-size: 60px 60px;
+    background-position: 78% 10%;
+    background-repeat: no-repeat;
+    &.stop {
+        background-image: url(/materials/ui/speed/stay.png );
+    }
+    &.walk {
+        background-image: url(/materials/ui/speed/walk.png );
+    }
+    &.run {
+        background-image: url(/materials/ui/speed/run.png );
+    }
 }
 
 CurrentTool {

@@ -16,8 +16,11 @@ public partial class SandboxHud : HudEntity<RootPanel>
 		RootPanel.AddChild<ChatBox>();
 		RootPanel.AddChild<VoiceList>();
 		RootPanel.AddChild<KillFeed>();
-		RootPanel.AddChild<Scoreboard<ScoreboardEntry>>();
+		RootPanel.AddChild<Scoreboard>();
 		RootPanel.AddChild<Health>();
+		RootPanel.AddChild<Armor>();
+		RootPanel.AddChild<PlayMode>();
+		RootPanel.AddChild<Speed>();
 		RootPanel.AddChild<InventoryBar>();
 		RootPanel.AddChild<CurrentTool>();
 		RootPanel.AddChild<SpawnMenu>();
