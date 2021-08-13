@@ -19,6 +19,6 @@ public class Armor : Panel
 		var a = player.Armor.CeilToInt();
 		var ba= (a >= 100 ? "" : (a >= 10 ? "0" : "00")) + a;
 
-		Label.Text = $"🛡️ {ba}";
+		Label.Text = $"🛡️  {ba}";
 	}
 }
