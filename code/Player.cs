@@ -1,9 +1,9 @@
 ﻿using Sandbox;
+using Sandbox.UI;
 using System;
 
 partial class SandboxPlayer : Player
-{
-	[Net] public string[] AntiPK { get; } = {"prop_physics"};
+{	[Net] public string[] AntiPK { get; } = {"prop_physics"};
 	[Net] public float Armor { get; set; }
 	[Net] public bool BuildMode { get; set; }
 	[Net] public bool ModeLock { get; set; }
@@ -240,6 +240,7 @@ partial class SandboxPlayer : Player
 		{
 			timeSinceJumpReleased = 1;
 		}
+
 	}
 
 	public override void StartTouch( Entity other )
@@ -274,6 +275,7 @@ partial class SandboxPlayer : Player
 		}
 	}
 
+
 	[ServerCmd( "pvp_mode" )]
 
 		public static void SetPVPMode()
@@ -284,6 +286,7 @@ partial class SandboxPlayer : Player
 		target.BuildMode = false;
 		target.TempLockMode();
 		target.Respawn();
+		return;
 	}
 
 	[ServerCmd( "build_mode" )]
@@ -296,6 +299,7 @@ partial class SandboxPlayer : Player
 		target.BuildMode = true;
 		target.TempLockMode();
 		target.Respawn();
+		return;
 	}
 
 	// TODO

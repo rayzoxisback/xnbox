@@ -24,5 +24,6 @@ public partial class SandboxHud : HudEntity<RootPanel>
 		RootPanel.AddChild<InventoryBar>();
 		RootPanel.AddChild<CurrentTool>();
 		RootPanel.AddChild<SpawnMenu>();
+		RootPanel.AddChild<modeSelect>();
 	}
 }
