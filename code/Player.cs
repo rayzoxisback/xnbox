@@ -1,15 +1,14 @@
-﻿using System.Threading.Tasks;
-using Sandbox;
-using Sandbox.UI;
+﻿using Sandbox;
+using System;
 
 partial class SandboxPlayer : Player
 {
+	[Net] public string[] AntiPK { get; } = {"prop_physics"};
 	[Net] public float Armor { get; set; }
 	[Net] public bool BuildMode { get; set; }
 	[Net] public bool ModeLock { get; set; }
 	[Net] public float Speed { get; set; }
   [Net] public bool GodMode { get; set; }
-
 	[Net] public bool IsStopped { get; set; }
 	[Net] public bool IsWalk { get; set; }
 
@@ -119,9 +118,16 @@ partial class SandboxPlayer : Player
 		Inventory.DeleteContents();
 	}
 
+	public bool AntiPropKill( DamageInfo info )
+	{
+	  if(Array.Exists(AntiPK, element => element == info.Attacker.ToString())) return true;
+		return false;
+	}
+
 	public override void TakeDamage( DamageInfo info )
 	{
 		if ( GodMode ) return;
+		if ( AntiPropKill(info) ) return;
 		if ( GetHitboxGroup( info.HitboxIndex ) == 1 )
 		{
 			info.Damage *= 10.0f;
