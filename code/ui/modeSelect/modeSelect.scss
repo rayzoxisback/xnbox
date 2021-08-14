@@ -41,6 +41,8 @@
 
 .menuclose,
 .menuopen {
+    font-family: poppins;
+    font-weight: bold;
     .inner button:not(.firstTime) {
         border: 5px solid white;
         margin: 25px;
@@ -54,6 +56,7 @@
         font-size: 75px;
         text-align: center;
         & label {
+            font-weight: bold;
             font-size: 75px;
         }
         & label:nth-child(2) {

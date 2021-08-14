@@ -18,6 +18,7 @@ public class Scoreboard : Sandbox.UI.Scoreboard<ScoreboardEntry>
 		Header.Add.Label( "player", "name" );
 		Header.Add.Label( "deaths", "deaths" );
 		Header.Add.Label( "ping", "ping" );
+		//Header.Add.Label( "ratio", "ratio");
 	}
 
 	public override void Tick()
@@ -51,12 +52,14 @@ public class ScoreboardEntry : Sandbox.UI.ScoreboardEntry
 		Kills.Delete();
 		Deaths.Delete();
 		Ping.Delete();
+		//Ratio.Delete();
 
 		Color = Add.Panel( "color" );
 		Avatar = Add.Image( "avatar:76561198099710884", "avatar" );
 		PlayerName = Add.Label( "Player Name", "name" );
 		Deaths = Add.Label( "0", "deaths" );
 		Ping = Add.Label( "0", "ping" );
+		//Ratio = Add.Label( "0", "ratio");
 	}
 
 	public override void UpdateFrom( PlayerScore.Entry entry )

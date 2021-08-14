@@ -1,3 +1,22 @@
+.DEV_PANEL {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+}
+
+.DEV1,
+.DEV2 {
+    font-size: 20px;
+    font-weight: bolder;
+    color: white;
+    font-family: poppins;
+    text-align: right;
+    text-shadow: 2px 2px 5px rgba( black, 0.3);
+}
+
 Health,
 Armor,
 PlayMode,
