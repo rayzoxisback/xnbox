@@ -36,6 +36,46 @@
 								from = "03 - default.vmat"
 								to = "models/rust_props/chairs/wooden_chairs.vmat"
 							},
+							{
+								from = "ferrari_base_color.vmat"
+								to = "materials/cars/ferrari/ferrari_base_color.vmat"
+							},
+							{
+								from = "ferrari_black.vmat"
+								to = "materials/cars/ferrari/ferrari_black.vmat"
+							},
+							{
+								from = "ferrari_black_glasses.vmat"
+								to = "materials/cars/ferrari/ferrari_black_glasses.vmat"
+							},
+							{
+								from = "ferrari_black_mat.vmat"
+								to = "materials/cars/ferrari/ferrari_black.vmat"
+							},
+							{
+								from = "ferrari_carbon.vmat"
+								to = "materials/cars/ferrari/ferrari_carbon.vmat"
+							},
+							{
+								from = "ferrari_dark_gray.vmat"
+								to = "materials/cars/ferrari/ferrari_dark_gray.vmat"
+							},
+							{
+								from = "ferrari_dark_red.vmat"
+								to = "materials/cars/ferrari/ferrari_black_red.vmat"
+							},
+							{
+								from = "ferrari_glasses_reflect.vmat"
+								to = "materials/cars/ferrari/ferrari_glass_reflect.vmat"
+							},
+							{
+								from = "ferrari_mesh.vmat"
+								to = "materials/cars/ferrari/ferrari_grill.vmat"
+							},
+							{
+								from = "ferrari_spot_light.vmat"
+								to = "materials/cars/ferrari/ferrari_black_red.vmat"
+							},
 						]
 						use_global_default = false
 						global_default_material = ""
@@ -158,6 +198,22 @@
 								"LOD1",
 								"LOD0",
 							]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						filename = "content/Ferrari.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 0.5
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
 						}
 					},
 				]

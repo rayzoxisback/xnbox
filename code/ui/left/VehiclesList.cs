@@ -5,18 +5,18 @@ using Sandbox.UI.Tests;
 using System.Linq;
 
 [Library]
-public partial class EntityList : Panel
+public partial class VehiclesList : Panel
 {
 	VirtualScrollPanel Canvas;
 
-	public bool Filter(Sandbox.LibraryAttribute x)
+	public bool isVehicle(Sandbox.LibraryAttribute x)
 	{
 		if (!x.Spawnable) return false;
-		if ( x.Name.StartsWith("ent_car") ) return false;
+		if(!x.Name.StartsWith("ent_car")) return false;
 		return true;
 	}
 
-	public EntityList()
+	public VehiclesList()
 	{
 		AddClass( "spawnpage" );
 		AddChild( out Canvas, "canvas" );
@@ -35,7 +35,7 @@ public partial class EntityList : Panel
 			};
 		};
 
-		var ents = Library.GetAllAttributes<Entity>().Where( x => Filter(x) ).OrderBy( x => x.Title ).ToArray();
+		var ents = Library.GetAllAttributes<Entity>().Where( x => isVehicle(x) ).OrderBy( x => x.Title ).ToArray();
 
 		foreach ( var entry in ents )
 		{

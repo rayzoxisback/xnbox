@@ -31,6 +31,9 @@ public partial class SpawnMenu : Panel
 
 				var ents = body.AddChild<EntityList>();
 				tabs.AddButtonActive( "🚀 Entités", ( b ) => ents.SetClass( "active", b ) );
+
+				var vehicles = body.AddChild<VehiclesList>();
+				tabs.AddButtonActive( "🚗 Véhicules", ( b ) => vehicles.SetClass( "active", b ) );
 			}
 		}
 
