@@ -3,15 +3,7 @@ using Sandbox.UI;
 using System;
 
 partial class SandboxPlayer : Player
-{	[Net] public string[] AntiPK { get; } = {"prop_physics"};
-	[Net] public float Armor { get; set; }
-	[Net] public bool BuildMode { get; set; }
-	[Net] public bool ModeLock { get; set; }
-	[Net] public float Speed { get; set; }
-  [Net] public bool GodMode { get; set; }
-	[Net] public bool IsStopped { get; set; }
-	[Net] public bool IsWalk { get; set; }
-
+{
 	private TimeSince timeSinceDropped;
 	private TimeSince timeSinceJumpReleased;
 
@@ -32,25 +24,18 @@ partial class SandboxPlayer : Player
 
 	public override void Spawn()
 	{
-		ModeLock = false;
-		BuildMode = true;
+		AntiDamageInit();
+		PropKillInit();
+		GameModeInit();
 		MainCamera = new FirstPersonCamera();
 		LastCamera = MainCamera;
 		base.Spawn();
 	}
 
-	public async void TempLockMode()
-	{
-		ModeLock = true;
-		await Task.Delay(20000);
-		ModeLock = false;
-	}
-
 	public override void Respawn()
 	{
 		SetModel( "models/citizen/citizen.vmdl" );
-
-		Armor = 50;
+		ArmorInit();
 
 		Controller = new WalkController();
 		Animator = new StandardPlayerAnimator();
@@ -69,22 +54,7 @@ partial class SandboxPlayer : Player
 		EnableShadowInFirstPerson = true;
 
 		Dress();
-
-		Inventory.DeleteContents();
-		Inventory.Add( new Flashlight() );
-		
-		if(BuildMode)
-		{
-			GodMode = true;
-			Inventory.Add( new GravGun() );
-			Inventory.Add( new Tool() );
-			Inventory.Add( new PhysGun(), true );
-		}else{
-			GodMode = false;
-			Inventory.Add( new SMG());
-			Inventory.Add( new Shotgun());
-			Inventory.Add( new Pistol(), true );
-		}
+		RespawnRules();
 
 		base.Respawn();
 	}
@@ -118,16 +88,11 @@ partial class SandboxPlayer : Player
 		Inventory.DeleteContents();
 	}
 
-	public bool AntiPropKill( DamageInfo info )
-	{
-	  if(Array.Exists(AntiPK, element => element == info.Attacker.ToString())) return true;
-		return false;
-	}
-
 	public override void TakeDamage( DamageInfo info )
 	{
-		if ( GodMode ) return;
-		if ( AntiPropKill(info) ) return;
+		if ( AntiDamage && (!PropKillEnabled) ) return;
+		if ( AntiPropKill( info ) ) return;
+		if ( AntiDamage ) return;
 		if ( GetHitboxGroup( info.HitboxIndex ) == 1 )
 		{
 			info.Damage *= 10.0f;
@@ -166,19 +131,11 @@ partial class SandboxPlayer : Player
 
 		return MainCamera;
 	}
-
 	public override void Simulate( Client cl )
 	{
 		base.Simulate( cl );
 
-
-		if ( IsServer ) 
-		{
-			var tspeed = ((Velocity.Length / 100) * 1.60934);
-			Speed = (float)tspeed;
-			IsStopped = tspeed == 0 ? true : false;
-			IsWalk = IsStopped ? false : (tspeed > 4 ? false : true);
-		}
+		SpeedCalculate();
 
 		if ( Input.ActiveChild != null )
 		{
@@ -275,32 +232,6 @@ partial class SandboxPlayer : Player
 		}
 	}
 
-
-	[ServerCmd( "pvp_mode" )]
-
-		public static void SetPVPMode()
-	{
-		var target = ConsoleSystem.Caller.Pawn as SandboxPlayer;
-		if ( target == null || (!target.BuildMode) ) return;
-		if ( target.ModeLock ) return;
-		target.BuildMode = false;
-		target.TempLockMode();
-		target.Respawn();
-		return;
-	}
-
-	[ServerCmd( "build_mode" )]
-
-		public static void SetBUILDMode()
-	{
-		var target = ConsoleSystem.Caller.Pawn as SandboxPlayer;
-		if ( target == null || target.BuildMode ) return;
-		if ( target.ModeLock ) return;
-		target.BuildMode = true;
-		target.TempLockMode();
-		target.Respawn();
-		return;
-	}
 
 	// TODO
 

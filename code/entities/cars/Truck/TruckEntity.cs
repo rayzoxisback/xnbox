@@ -5,7 +5,7 @@ using System.Collections.Generic;
 [Library( "ent_car_truck", Title = "Truck", Spawnable = true )]
 public partial class TruckEntity : Prop, IUse
 {
-	public static float truck_speed_divide = 0.2f; // 0.0f = low -- 0.5f medium -- 1.0f fast	
+	public static float truck_speed_divide = 1.0f; // 0.0f = low -- 0.5f medium -- 1.0f fast	
 
   	[ConVar.Replicated( "debug_car" )]
 

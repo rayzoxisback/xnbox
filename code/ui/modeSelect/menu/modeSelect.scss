@@ -30,10 +30,8 @@
 
 .inner {
     position: relative;
-    //background-color: rgba(#0066ff, 0.3);
-    //backdrop-filter: blur(5px) brightness(0.89) contrast(0.93);
     height: 400px;
-    width: 800px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -44,15 +42,16 @@
     font-family: poppins;
     font-weight: bold;
     .inner button:not(.firstTime) {
+        pointer-events: all;
         border: 5px solid white;
-        margin: 25px;
+        margin: 15px;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
         background-color: rgba(white, 0.1);
-        height: 200px;
-        width: 200px;
+        height: 250px;
+        width: 250px;
         font-size: 75px;
         text-align: center;
         & label {
@@ -63,9 +62,18 @@
             transition: all 250ms ease-in-out;
             font-size: 25px;
         }
+        & label:nth-child(3) {
+            transition: all 250ms ease-in-out;
+            font-size: 14px;
+        }
         &:hover {
             cursor: pointer;
             background-color: rgba(#0066ff, 0.5);
+        }
+        &.lock {
+            cursor: not-allowed;
+            pointer-events: none;
+            background-color: rgba(red, 0.2);
         }
         &:hover label:nth-child(2) {
             font-size: 26px;

@@ -18,7 +18,7 @@ public class PlayMode : Panel
 		var player = Local.Pawn as SandboxPlayer;
 		if ( player == null ) return;
 
-		var m = player.BuildMode ? Build : PvP;
+		var m = player.GameMode == 1 ? Build : PvP;
 
 		Label.Text = $"{m}";
 	}
