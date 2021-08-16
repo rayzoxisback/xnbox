@@ -42,6 +42,7 @@ partial class SandboxGame : Game
 			.Run();
 
 		var ent = new Prop();
+		ent.Owner = owner;
 		ent.Position = tr.EndPos;
 		ent.Rotation = Rotation.From( new Angles( 0, owner.EyeRot.Angles().yaw, 0 ) ) * Rotation.FromAxis( Vector3.Up, 180 );
 		ent.SetModel( modelname );
@@ -74,10 +75,10 @@ partial class SandboxGame : Game
 				return;
 		}
 
+		ent.Owner = owner;
 		ent.Position = tr.EndPos;
 		ent.Rotation = Rotation.From( new Angles( 0, owner.EyeRot.Angles().yaw, 0 ) );
 
-		//Log.Info( $"ent: {ent}" );
 	}
 
 	public override void DoPlayerNoclip( Client player )
