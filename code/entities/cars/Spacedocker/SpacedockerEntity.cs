@@ -2,19 +2,19 @@ using Sandbox;
 using System;
 using System.Collections.Generic;
 
-[Library( "ent_car_renault", Title = "Camion Livraison", Spawnable = true )]
-public partial class RenaultEntity : Prop, IUse
+[Library( "ent_car_spacedocker", Title = "Spacedocker", Spawnable = true )]
+public partial class SpacedockerEntity : Prop, IUse
 {
-	public static float renault_speed_divide = 0.3f; // 0.0f = low -- 0.5f medium -- 1.0f fast	
+	public static float spacedocker_speed_divide = 0.6f; // 0.0f = low -- 0.5f medium -- 1.0f fast	
 
   	[ConVar.Replicated( "debug_car" )]
 
 	public static bool debug_car { get; set; } = false;
 
-	private RenaultWheel frontLeft;
-	private RenaultWheel frontRight;
-	private RenaultWheel backLeft;
-	private RenaultWheel backRight;
+	private SpacedockerWheel frontLeft;
+	private SpacedockerWheel frontRight;
+	private SpacedockerWheel backLeft;
+	private SpacedockerWheel backRight;
 
 	private float frontLeftDistance;
 	private float frontRightDistance;
@@ -51,12 +51,12 @@ public partial class RenaultEntity : Prop, IUse
 
 	private InputState currentInput;
 
-	public RenaultEntity()
+	public SpacedockerEntity()
 	{
-		frontLeft = new RenaultWheel( this );
-		frontRight = new RenaultWheel( this );
-		backLeft = new RenaultWheel( this );
-		backRight = new RenaultWheel( this );
+		frontLeft = new SpacedockerWheel( this );
+		frontRight = new SpacedockerWheel( this );
+		backLeft = new SpacedockerWheel( this );
+		backRight = new SpacedockerWheel( this );
 	}
 
 	private Player driver;
@@ -72,7 +72,7 @@ public partial class RenaultEntity : Prop, IUse
 	public override void Spawn()
 	{
 		base.Spawn();
-		var mdl = "models/cars/Renault/renault";
+		var mdl = "models/cars/Spacedocker/spacedocker";
 		SetModel( mdl );
 		SetupPhysicsFromModel( PhysicsMotionType.Dynamic, false );
 		SetInteractsExclude( CollisionLayer.Player );
@@ -100,20 +100,20 @@ public partial class RenaultEntity : Prop, IUse
 			chassis_axle_front.SetModel( "entities/modular_vehicle/chassis_axle_front.vmdl" );
 			chassis_axle_front.Transform = Transform;
 			chassis_axle_front.Parent = this;
-			chassis_axle_front.LocalPosition = new Vector3( 1.985f, 0, 0.4f ) * 33.0f;
+			chassis_axle_front.LocalPosition = new Vector3( 3.0f, 0, 0.5f ) * 34.0f;
 			clientModels.Add( chassis_axle_front );
 
 			{
 				wheel0 = new ModelEntity();
-				wheel0.SetModel( "models/cars/Renault/renault_wheel" );
-				wheel0.SetParent( chassis_axle_front, "Wheel_Steer_R", new Transform( Vector3.OneX * (-0.2f * 40), Rotation.From( 0, 180, 0 ) ) );
+				wheel0.SetModel( "models/cars/Spacedocker/spacedocker_wheel" );
+				wheel0.SetParent( chassis_axle_front, "Wheel_Steer_R", new Transform( Vector3.OneX * (-0.25f * 40), Rotation.From( 0, 180, 0 ) ) );
 				clientModels.Add( wheel0 );
 			}
 
 			{
 				wheel1 = new ModelEntity();
-				wheel1.SetModel( "models/cars/Renault/renault_wheel" );
-				wheel1.SetParent( chassis_axle_front, "Wheel_Steer_L", new Transform( Vector3.OneX * (0.2f * 40), Rotation.From( 0, 0, 0 ) ) );
+				wheel1.SetModel( "models/cars/Spacedocker/spacedocker_wheel" );
+				wheel1.SetParent( chassis_axle_front, "Wheel_Steer_L", new Transform( Vector3.OneX * (0.25f * 40), Rotation.From( 0, 0, 0 ) ) );
 				clientModels.Add( wheel1 );
 			}
 
@@ -130,7 +130,7 @@ public partial class RenaultEntity : Prop, IUse
 			chassis_axle_rear.SetModel( "entities/modular_vehicle/chassis_axle_rear.vmdl" );
 			chassis_axle_rear.Transform = Transform;
 			chassis_axle_rear.Parent = this;
-			chassis_axle_rear.LocalPosition = new Vector3( -2.05f, 0, 0.4f ) * 33.0f;
+			chassis_axle_rear.LocalPosition = new Vector3( -1.0f, 0, 0.5f ) * 34.0f;
 			clientModels.Add( chassis_axle_rear );
 
 			{
@@ -142,15 +142,15 @@ public partial class RenaultEntity : Prop, IUse
 
 			{
 				wheel2 = new ModelEntity();
-				wheel2.SetModel( "models/cars/Renault/renault_wheel" );
-				wheel2.SetParent( chassis_axle_rear, "Axle_Rear_Center", new Transform( Vector3.Left * (0.9f * 40), Rotation.From( 0, 90, 0 ) ) );
+				wheel2.SetModel( "models/cars/Spacedocker/spacedocker_wheel" );
+				wheel2.SetParent( chassis_axle_rear, "Axle_Rear_Center", new Transform( Vector3.Left * (1.2f * 40), Rotation.From( 0, 90, 0 ) ) );
 				clientModels.Add( wheel2 );
 			}
 
 			{
 				wheel3 = new ModelEntity();
-				wheel3.SetModel( "models/cars/Renault/renault_wheel" );
-				wheel3.SetParent( chassis_axle_rear, "Axle_Rear_Center", new Transform( Vector3.Right * (0.9f * 40), Rotation.From( 0, -90, 0 ) ) );
+				wheel3.SetModel( "models/cars/Spacedocker/spacedocker_wheel" );
+				wheel3.SetParent( chassis_axle_rear, "Axle_Rear_Center", new Transform( Vector3.Right * (1.2f * 40), Rotation.From( 0, -90, 0 ) ) );
 				clientModels.Add( wheel3 );
 			}
     }
@@ -270,7 +270,7 @@ public partial class RenaultEntity : Prop, IUse
 		if ( backWheelsOnGround )
 		{
 			var forwardSpeed = MathF.Abs( localVelocity.x );
-			var speedFactor = renault_speed_divide - (forwardSpeed / 5000.0f).Clamp( 0.0f, 1.0f );
+			var speedFactor = spacedocker_speed_divide - (forwardSpeed / 5000.0f).Clamp( 0.0f, 1.0f );
 			var acceleration = speedFactor * (accelerateDirection < 0.0f ? 500.0f : 1000.0f) * accelerateDirection * dt;
 			body.Velocity += rotation * new Vector3( acceleration, 0, 0 );
 		}
@@ -372,8 +372,8 @@ public partial class RenaultEntity : Prop, IUse
 		if ( user is SandboxPlayer player && player.Vehicle == null )
 		{
 			player.Vehicle = this;
-			player.VehicleController = new RenaultController();
-			player.VehicleCamera = new RenaultCamera();
+			player.VehicleController = new SpacedockerController();
+			player.VehicleCamera = new SpacedockerCamera();
 			player.Tags.Add( "driving" );
 			driver = player;
 		}
