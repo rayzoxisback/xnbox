@@ -27,13 +27,17 @@ public partial class SpawnMenu : Panel
 
 			{
 				var props = body.AddChild<SpawnList>();
-				tabs.SelectedButton = tabs.AddButtonActive( "📦 Modèles", ( b ) => props.SetClass( "active", b ) );
+				tabs.SelectedButton = tabs.AddButtonActive( "📦 Props", ( b ) => props.SetClass( "active", b ) );
 
 				var ents = body.AddChild<EntityList>();
-				tabs.AddButtonActive( "🚀 Entités", ( b ) => ents.SetClass( "active", b ) );
+				tabs.AddButtonActive( "🚀 Entities", ( b ) => ents.SetClass( "active", b ) );
+
+				var weapons = body.AddChild<WeaponsList>();
+				tabs.AddButtonActive( "🔫 Weapons", ( b ) => weapons.SetClass( "active", b ) );
 
 				var vehicles = body.AddChild<VehiclesList>();
-				tabs.AddButtonActive( "🚗 Véhicules", ( b ) => vehicles.SetClass( "active", b ) );
+				tabs.AddButtonActive( "🚗 Vehicles", ( b ) => vehicles.SetClass( "active", b ) );
+
 			}
 		}
 

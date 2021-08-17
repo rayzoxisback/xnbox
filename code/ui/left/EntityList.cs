@@ -13,6 +13,7 @@ public partial class EntityList : Panel
 	{
 		if (!x.Spawnable) return false;
 		if ( x.Name.StartsWith("ent_car") ) return false;
+		if ( x.Name.StartsWith("weapon_") ) return false;
 		return true;
 	}
 
