@@ -24,7 +24,6 @@ partial class SandboxPlayer : Player
 
 	public override void Spawn()
 	{
-		AntiDamageInit();
 		PropKillInit();
 		GameModeInit();
 		MainCamera = new FirstPersonCamera();
@@ -90,9 +89,8 @@ partial class SandboxPlayer : Player
 
 	public override void TakeDamage( DamageInfo info )
 	{
-		if ( AntiDamage && (!PropKillEnabled) ) return;
+		if ( GameMode == (int)GM.BUILD && PropKillEnabled == false ) return;
 		if ( AntiPropKill( info ) ) return;
-		if ( AntiDamage ) return;
 		if ( GetHitboxGroup( info.HitboxIndex ) == 1 )
 		{
 			info.Damage *= 10.0f;

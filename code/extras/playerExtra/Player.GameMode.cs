@@ -4,7 +4,9 @@ partial class SandboxPlayer
 {
 	[Net] public bool ModeLock { get; set; }
 	[Net] public int ModeLockWait { get; set; }
-	[Net] public int GameMode { get; set; } // 1 == Build - 2 == PVP
+	[Net] public int GameMode { get; set; }
+	public enum GM { BUILD = 1, PVP = 2 }
+
 
 	public void GameModeInit()
 	{
@@ -16,16 +18,14 @@ partial class SandboxPlayer
 	{
 		Inventory.DeleteContents();
 		Inventory.Add( new Flashlight() );
-		if ( GameMode == 1 )
+		if ( GameMode == (int)GM.BUILD )
 		{
-			AntiDamage = true;
 			Inventory.Add( new GravGun() );
 			Inventory.Add( new Tool() );
 			Inventory.Add( new PhysGun(), true );
 		}
-		else if ( GameMode == 2 )
+		else if ( GameMode == (int)GM.PVP )
 		{
-			AntiDamage = false;
 			Inventory.Add( new SMG() );
 			Inventory.Add( new Shotgun() );
 			Inventory.Add( new Pistol(), true );
@@ -56,10 +56,11 @@ partial class SandboxPlayer
 
 	public static void SetPVPMode()
 	{
+		var GMPVP = (int)GM.PVP;
 		var target = ConsoleSystem.Caller.Pawn as SandboxPlayer;
-		if ( target == null || (target.GameMode == 2) ) return;
+		if ( target == null || (target.GameMode == GMPVP) ) return;
 		if ( target.ModeLock ) return;
-		target.GameMode = 2;
+		target.GameMode = GMPVP;
 		target.TempLockMode();
 		target.Respawn();
 		return;
@@ -69,10 +70,11 @@ partial class SandboxPlayer
 
 	public static void SetBUILDMode()
 	{
+		var GMBUILD = (int)GM.BUILD;
 		var target = ConsoleSystem.Caller.Pawn as SandboxPlayer;
-		if ( target == null || (target.GameMode == 1) ) return;
+		if ( target == null || (target.GameMode == GMBUILD) ) return;
 		if ( target.ModeLock ) return;
-		target.GameMode = 1;
+		target.GameMode = GMBUILD;
 		target.TempLockMode();
 		target.Respawn();
 		return;

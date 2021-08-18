@@ -16,8 +16,7 @@ partial class SandboxPlayer
 
 	public bool AntiPropKill( DamageInfo info )
 	{
-		if ( PropKillEnabled ) return false;
-		if ( Array.Exists( AntiPK, element => element == info.Attacker.ToString() ) ) return true;
+		if ( Array.Exists( AntiPK, element => element == info.Attacker.ToString() ) && PropKillEnabled == false ) return true;
 		return false;
 	}
 
