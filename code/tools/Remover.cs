@@ -32,6 +32,9 @@
 				if ( tr.Entity.IsWorld )
 					return;
 
+				if (! protect.SameOwner(Owner,tr.Entity ) )
+					return;
+
 				tr.Entity.Delete();
 
 				var particle = Particles.Create( "particles/physgun_freeze.vpcf" );

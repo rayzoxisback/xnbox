@@ -110,6 +110,9 @@ public partial class GravGun : Carriable
 			if ( !modelEnt.IsValid() )
 				return;
 
+			if (! protect.SameOwner(owner,tr.Entity ) )
+					return;
+
 			var body = tr.Body;
 
 			if ( Input.Pressed( InputButton.Attack1 ) )

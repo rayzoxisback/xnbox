@@ -71,11 +71,16 @@
 				if ( tr.Entity is BalloonEntity )
 					return;
 
+				if (! protect.SameOwner(Owner,tr.Entity,true ) )
+					return;
+
 				var ent = new BalloonEntity
 				{
 					Position = tr.EndPos,
 				};
 
+				ent.Owner = Owner;
+				
 				ent.SetModel( "models/citizen_props/balloonregular01.vmdl" );
 				ent.PhysicsBody.GravityScale = -0.2f;
 				ent.RenderColor = Tint;

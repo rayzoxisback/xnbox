@@ -53,6 +53,9 @@
 				if ( !tr.Entity.IsValid() )
 					return;
 
+				if (! protect.SameOwner(Owner,tr.Entity ) )
+					return;
+
 				var attached = !tr.Entity.IsWorld && tr.Body.IsValid() && tr.Body.PhysicsGroup != null && tr.Body.Entity.IsValid();
 
 				if ( attached && tr.Entity is not Prop )
@@ -76,6 +79,8 @@
 					TargetBody = attached ? tr.Body : null,
 					Massless = massless
 				};
+
+				ent.Owner = Owner;
 
 				if ( attached )
 				{

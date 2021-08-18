@@ -48,6 +48,9 @@
 				if ( !tr.Hit || !tr.Entity.IsValid() )
 					return;
 
+				if (! protect.SameOwner(Owner,tr.Entity ) )
+					return;
+
 				CreateHitEffects( tr.EndPos );
 
 				if ( tr.Entity is LampEntity lamp )
@@ -74,6 +77,8 @@
 					Rotation = Rotation.Identity,
 					LightCookie = Texture.Load( "materials/effects/lightcookie.vtex" )
 				};
+
+				lamp.Owner = Owner;
 
 				lamp.SetModel( Model );
 				lamp.SetupPhysicsFromModel( PhysicsMotionType.Dynamic, false );

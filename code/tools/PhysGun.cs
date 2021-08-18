@@ -166,6 +166,8 @@ public partial class PhysGun : Carriable
 		var rootEnt = tr.Entity.Root;
 		var body = tr.Body;
 
+		if( !protect.SameOwner(owner,rootEnt) ) return;
+
 		if ( tr.Entity.Parent.IsValid() )
 		{
 			if ( rootEnt.IsValid() && rootEnt.PhysicsGroup != null )

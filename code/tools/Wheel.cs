@@ -47,6 +47,9 @@
 				if ( !tr.Entity.IsValid() )
 					return;
 
+				if (! protect.SameOwner(Owner,tr.Entity ) )
+					return;
+
 				var attached = !tr.Entity.IsWorld && tr.Body.IsValid() && tr.Body.PhysicsGroup != null && tr.Body.Entity.IsValid();
 
 				if ( attached && tr.Entity is not Prop )
@@ -66,6 +69,8 @@
 					Position = tr.EndPos,
 					Rotation = Rotation.LookAt( tr.Normal ) * Rotation.From( new Angles( 0, 90, 0 ) ),
 				};
+
+				ent.Owner = Owner;
 
 				ent.SetModel( "models/citizen_props/wheel01.vmdl" );
 

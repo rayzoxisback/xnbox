@@ -28,6 +28,9 @@
 				if ( tr.Entity is not Prop prop )
 					return;
 
+				if (! protect.SameOwner(Owner,tr.Entity ) )
+					return;
+
 				if ( Input.Pressed( InputButton.Attack1 ) )
 				{
 					if ( prop.Root is not Prop rootProp )

@@ -48,6 +48,9 @@
 
 				if ( !tr.Hit || !tr.Entity.IsValid() )
 					return;
+				
+				if (! protect.SameOwner(Owner,tr.Entity ) )
+					return;
 
 				CreateHitEffects( tr.EndPos );
 
@@ -71,6 +74,8 @@
 					LightCookie = Texture.Load( "materials/effects/lightcookie.vtex" )
 				};
 
+				light.Owner = Owner;
+				
 				light.UseFogNoShadows();
 				light.SetModel( Model );
 				light.SetupPhysicsFromModel( PhysicsMotionType.Dynamic, false );

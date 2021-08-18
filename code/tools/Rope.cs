@@ -37,6 +37,9 @@
 				if ( tr.Entity is not ModelEntity )
 					return;
 
+				if (! protect.SameOwner(Owner,tr.Entity ) )
+					return;
+
 				if ( !targetBody.IsValid() )
 				{
 					targetBody = tr.Body;
