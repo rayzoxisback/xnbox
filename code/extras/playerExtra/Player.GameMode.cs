@@ -1,5 +1,7 @@
 using Sandbox;
 using System;
+using System.Collections.Generic;
+
 partial class SandboxPlayer
 {
 	[Net] public bool ModeLock { get; set; }
@@ -7,6 +9,15 @@ partial class SandboxPlayer
 	[Net] public int GameMode { get; set; }
 	public enum GM { BUILD = 1, PVP = 2 }
 
+	public string GMICON()
+	{
+		switch(GameMode)
+		{
+			case 1: return "🏗️";
+			case 2: return "⚔️";
+			default: return "⌛";
+		}
+	}
 
 	public void GameModeInit()
 	{

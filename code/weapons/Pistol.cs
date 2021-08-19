@@ -10,6 +10,13 @@ partial class Pistol : Weapon
 
 	public TimeSince TimeSinceDischarge { get; set; }
 
+	public override void Simulate( Client owner )
+	{
+		base.Simulate( owner );
+		if(protect.NeedRestrictPVPWeapon(owner.Pawn as SandboxPlayer, this)) return;
+	}
+
+
 	public override void Spawn()
 	{
 		base.Spawn();

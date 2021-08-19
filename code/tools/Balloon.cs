@@ -53,6 +53,8 @@
 				if ( !useRope && !Input.Pressed( InputButton.Attack2 ) )
 					return;
 
+				if(protect.InVehicle(Owner)) return;
+
 				var startPos = Owner.EyePos;
 				var dir = Owner.EyeRot.Forward;
 

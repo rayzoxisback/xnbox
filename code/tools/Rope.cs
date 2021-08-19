@@ -10,6 +10,7 @@
 
 		public override void Simulate()
 		{
+			if(protect.InVehicle(Owner)) return;
 			if ( !Host.IsServer )
 				return;
 

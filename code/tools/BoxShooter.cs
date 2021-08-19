@@ -24,6 +24,7 @@
 
 		void ShootBox()
 		{
+			if(protect.InVehicle(Owner)) return;
 			var ent = new Prop
 			{
 				Position = Owner.EyePos + Owner.EyeRot.Forward * 50,

@@ -9,6 +9,12 @@ partial class SMG : Weapon
 	public override float SecondaryRate => 1.0f;
 	public override float ReloadTime => 5.0f;
 
+	public override void Simulate( Client owner )
+	{
+		base.Simulate( owner );
+		if(protect.NeedRestrictPVPWeapon(owner.Pawn as SandboxPlayer, this)) return;
+	}
+
 	public override void Spawn()
 	{
 		base.Spawn();

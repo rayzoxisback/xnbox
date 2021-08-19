@@ -48,7 +48,7 @@ public partial class PhysGun : Carriable
 	public override void Simulate( Client client )
 	{
 		if ( Owner is not Player owner ) return;
-
+		if(protect.InVehicle(owner)) return;
 		var eyePos = owner.EyePos;
 		var eyeDir = owner.EyeRot.Forward;
 		var eyeRot = Rotation.From( new Angles( 0.0f, owner.EyeRot.Angles().yaw, 0.0f ) );
@@ -118,6 +118,7 @@ public partial class PhysGun : Carriable
 
 	private void TryUnfreezeAll( Player owner, Vector3 eyePos, Rotation eyeRot, Vector3 eyeDir )
 	{
+
 		var tr = Trace.Ray( eyePos, eyePos + eyeDir * MaxTargetDistance )
 			.UseHitboxes()
 			.Ignore( owner, false )
@@ -155,6 +156,7 @@ public partial class PhysGun : Carriable
 
 	private void TryStartGrab( Player owner, Vector3 eyePos, Rotation eyeRot, Vector3 eyeDir )
 	{
+
 		var tr = Trace.Ray( eyePos, eyePos + eyeDir * MaxTargetDistance )
 			.UseHitboxes()
 			.Ignore( owner, false )

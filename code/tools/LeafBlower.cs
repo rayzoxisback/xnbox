@@ -9,11 +9,13 @@
 
 		public override void Simulate()
 		{
+			if(protect.InVehicle(Owner)) return;
 			if ( !Host.IsServer )
 				return;
 
 			using ( Prediction.Off() )
 			{
+
 				bool push = Input.Down( InputButton.Attack1 );
 				if ( !push && !Input.Down( InputButton.Attack2 ) )
 					return;

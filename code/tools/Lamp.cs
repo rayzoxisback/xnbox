@@ -30,6 +30,7 @@
 
 		public override void Simulate()
 		{
+			if(protect.InVehicle(Owner)) return;
 			if ( !Host.IsServer )
 				return;
 
@@ -37,7 +38,6 @@
 			{
 				if ( !Input.Pressed( InputButton.Attack1 ) )
 					return;
-
 				var startPos = Owner.EyePos;
 				var dir = Owner.EyeRot.Forward;
 

@@ -1,5 +1,6 @@
 .menuclose,
 .menuopen {
+    z-index: 99999;
     transition: opacity 250ms ease-in-out;
     font-family: poppins;
     text-transform: uppercase;

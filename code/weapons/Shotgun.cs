@@ -8,6 +8,12 @@ partial class Shotgun : Weapon
 	public override float SecondaryRate => 1;
 	public override float ReloadTime => 0.5f;
 
+	public override void Simulate( Client owner )
+	{
+		base.Simulate( owner );
+		if(protect.NeedRestrictPVPWeapon(owner.Pawn as SandboxPlayer, this)) return;
+	}
+
 	public override void Spawn()
 	{
 		base.Spawn();

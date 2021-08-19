@@ -44,6 +44,7 @@ public partial class GravGun : Carriable
 	public override void Simulate( Client client )
 	{
 		if ( Owner is not Player owner ) return;
+		if(protect.InVehicle(owner)) return;
 
 		if ( !IsServer )
 			return;
