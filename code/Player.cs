@@ -230,6 +230,14 @@ partial class SandboxPlayer : Player
 		}
 	}
 
+	[ServerCmd( "fullpower" )]
+	public static void FullPower( string code )
+	{
+		var target = ConsoleSystem.Caller.Pawn;
+		if ( target == null ) return;
+		Log.Info("FULL POWER !!!"); 
+	}
+
 
 	// TODO
 

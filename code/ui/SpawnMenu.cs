@@ -22,8 +22,10 @@ public partial class SpawnMenu : Panel
 		{
 			var tabs = left.AddChild<ButtonGroup>();
 			tabs.AddClass( "tabs" );
+			tabs.AddClass( "theme" );
 
 			var body = left.Add.Panel( "body" );
+			body.AddClass( "theme" );
 
 			{
 				var props = body.AddChild<SpawnList>();
@@ -48,6 +50,7 @@ public partial class SpawnMenu : Panel
 				tabs.Add.Button( "Outils" ).AddClass( "active" );
 				tabs.Add.Button( "Utilitaire" );
 			}
+			tabs.AddClass( "theme" );
 			var body = right.Add.Panel( "body" );
 			{
 				toollist = body.Add.Panel( "toollist" );
@@ -56,6 +59,7 @@ public partial class SpawnMenu : Panel
 				}
 				body.Add.Panel( "inspector" );
 			}
+			body.AddClass( "theme" );
 		}
 
 	}
