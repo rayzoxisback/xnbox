@@ -37,7 +37,7 @@
 				if ( tr.Entity.IsWorld )
 					return;
 
-				if (! protect.SameOwner(Owner,tr.Entity ) )
+				if (! protect.SameOwner(Owner,tr.Entity, false, false ) )
 					return;
 
 				var body = tr.Body;

@@ -36,7 +36,7 @@ namespace Sandbox.Tools
 				if ( tr.Entity is LightEntity || tr.Entity is LampEntity )
 					return;
 
-				if (! protect.SameOwner(Owner,tr.Entity ) )
+				if (! protect.SameOwner(Owner,tr.Entity, false, false ) )
 					return;
 
 				var scale = reset ? 1.0f : Math.Clamp( tr.Entity.Scale + ((0.5f * Time.Delta) * resizeDir), 0.4f, 4.0f );

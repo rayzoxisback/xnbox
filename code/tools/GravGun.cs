@@ -111,7 +111,7 @@ public partial class GravGun : Carriable
 			if ( !modelEnt.IsValid() )
 				return;
 
-			if (! protect.SameOwner(owner,tr.Entity ) )
+			if (! protect.SameOwner(owner,tr.Entity, false, false ) )
 					return;
 
 			var body = tr.Body;
