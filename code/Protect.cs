@@ -26,7 +26,7 @@ namespace Sandbox
       return isDriving;
     }
 
-    public bool NeedRestrictPVPWeapon(Player player, Weapon weapon, bool showMessage = false )
+    public bool NeedRestrictPVPWeapon(Player player, Weapon weapon, bool showMessage = true )
     {
       var sbp = player as SandboxPlayer;
       if(sbp == null) return false;
