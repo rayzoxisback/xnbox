@@ -3,8 +3,6 @@
 [Library( "sandbox", Title = "Sandbox" )]
 partial class SandboxGame : Game
 {
-	[Net] public string[] AntiPK {get;} = { "prop_physics" };
-
 	public SandboxGame()
 	{
 		if ( IsServer )
