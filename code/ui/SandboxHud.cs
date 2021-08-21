@@ -27,5 +27,6 @@ public partial class SandboxHud : HudEntity<RootPanel>
 		RootPanel.AddChild<SpawnMenu>();
 		RootPanel.AddChild<modeSelect>();
 		RootPanel.AddChild<OwnerEye>();
+		RootPanel.AddChild<Death>();
 	}
 }

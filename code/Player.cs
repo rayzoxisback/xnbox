@@ -60,6 +60,7 @@ partial class SandboxPlayer : Player
 
 	public override void OnKilled()
 	{
+		PlaySound("xnbox_death");
 		base.OnKilled();
 
 		if ( lastDamage.Flags.HasFlag( DamageFlags.Vehicle ) )
@@ -134,6 +135,7 @@ partial class SandboxPlayer : Player
 		base.Simulate( cl );
 
 		SpeedCalculate();
+		TakeFallDamage();
 
 		if ( Input.ActiveChild != null )
 		{

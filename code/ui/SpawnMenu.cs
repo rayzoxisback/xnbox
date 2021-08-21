@@ -34,6 +34,9 @@ public partial class SpawnMenu : Panel
 				var ents = body.AddChild<EntityList>();
 				tabs.AddButtonActive( "🚀 Entities", ( b ) => ents.SetClass( "active", b ) );
 
+				var drp_ents = body.AddChild<DRPEntityList>();
+				tabs.AddButtonActive( "👮 DARKRP Entities", ( b ) => drp_ents.SetClass( "active", b ) );
+
 				var weapons = body.AddChild<WeaponsList>();
 				tabs.AddButtonActive( "🔫 Weapons", ( b ) => weapons.SetClass( "active", b ) );
 
