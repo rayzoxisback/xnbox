@@ -374,6 +374,7 @@ public partial class QuadbikeEntity : Prop, IUse
 			player.Vehicle = this;
 			player.VehicleController = new QuadbikeController();
 			player.VehicleCamera = new QuadbikeCamera();
+			player.LocalPosition = Vector3.Up * 80;
 			player.Tags.Add( "driving" );
 			driver = player;
 		}

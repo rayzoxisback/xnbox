@@ -53,7 +53,10 @@
 				if ( !useRope && !Input.Pressed( InputButton.Attack2 ) )
 					return;
 
-				if(protect.InVehicle(Owner)) return;
+
+				if(Input.Pressed( InputButton.Attack1 ) && protect.InVehicle(Owner,true))	return;
+				if(Input.Down( InputButton.Attack2 ) && protect.InVehicle(Owner,true))	return;
+
 
 				var startPos = Owner.EyePos;
 				var dir = Owner.EyeRot.Forward;
@@ -91,7 +94,7 @@
 
 				if ( !useRope )
 					return;
-
+	
 				var rope = Particles.Create( "particles/rope.vpcf" );
 				rope.SetEntity( 0, ent );
 

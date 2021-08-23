@@ -9,6 +9,11 @@
 		{
 			if ( Host.IsServer )
 			{
+
+				if(Input.Pressed( InputButton.Attack1 ) && protect.InVehicle(Owner,true))	return;
+				if(Input.Down( InputButton.Attack2 ) && protect.InVehicle(Owner,true))	return;
+
+
 				if ( Input.Pressed( InputButton.Attack1 ) )
 				{
 					ShootBox();
@@ -24,7 +29,6 @@
 
 		void ShootBox()
 		{
-			if(protect.InVehicle(Owner)) return;
 			var ent = new Prop
 			{
 				Position = Owner.EyePos + Owner.EyeRot.Forward * 50,

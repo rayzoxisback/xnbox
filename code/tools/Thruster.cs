@@ -27,12 +27,14 @@
 
 		public override void Simulate()
 		{
-			if(protect.InVehicle(Owner)) return;
 			if ( !Host.IsServer )
 				return;
 
 			using ( Prediction.Off() )
 			{
+				if(Input.Pressed( InputButton.Attack1 ) && protect.InVehicle(Owner,true))	return;
+			  if(Input.Down( InputButton.Attack2 ) && protect.InVehicle(Owner,true))	return;
+
 				if ( Input.Pressed( InputButton.Attack2 ) )
 				{
 					massless = !massless;

@@ -1,25 +1,22 @@
-﻿using Sandbox;
+using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 using Sandbox.UI.Tests;
 using System.Linq;
 
 [Library]
-public partial class EntityList : Panel
+public partial class SeatEntityList : Panel
 {
 	VirtualScrollPanel Canvas;
 
-	public bool Filter(Sandbox.LibraryAttribute x)
+	public bool isSeat(Sandbox.LibraryAttribute x)
 	{
 		if (!x.Spawnable) return false;
-		if ( x.Name.StartsWith("ent_drp_") ) return false;
-		if ( x.Name.StartsWith("ent_car") ) return false;
-		if ( x.Name.StartsWith("weapon_") ) return false;
-		if ( x.Name.StartsWith("ent_seat_")) return false;
+		if (!x.Name.StartsWith("ent_seat_")) return false;
 		return true;
 	}
 
-	public EntityList()
+	public SeatEntityList()
 	{
 		AddClass( "spawnpage" );
 		AddChild( out Canvas, "canvas" );
@@ -38,7 +35,7 @@ public partial class EntityList : Panel
 			};
 		};
 
-		var ents = Library.GetAllAttributes<Entity>().Where( x => Filter(x) ).OrderBy( x => x.Title ).ToArray();
+		var ents = Library.GetAllAttributes<Entity>().Where( x => isSeat(x) ).OrderBy( x => x.Title ).ToArray();
 
 		foreach ( var entry in ents )
 		{

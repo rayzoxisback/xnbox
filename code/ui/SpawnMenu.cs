@@ -43,6 +43,10 @@ public partial class SpawnMenu : Panel
 				var vehicles = body.AddChild<VehiclesList>();
 				tabs.AddButtonActive( "🚗 Vehicles", ( b ) => vehicles.SetClass( "active", b ) );
 
+				var seat = body.AddChild<SeatEntityList>();
+				seat.AddClass("wip");
+				tabs.AddButtonActive( "🪑 Seat [WIP]", ( b ) => seat.SetClass( "active", b ) ).AddClass("wip");
+
 			}
 		}
 

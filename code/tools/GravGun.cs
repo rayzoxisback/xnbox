@@ -44,13 +44,17 @@ public partial class GravGun : Carriable
 	public override void Simulate( Client client )
 	{
 		if ( Owner is not Player owner ) return;
-		if(protect.InVehicle(owner)) return;
 
 		if ( !IsServer )
 			return;
 
 		using ( Prediction.Off() )
 		{
+
+			if(Input.Pressed( InputButton.Attack1 ) && protect.InVehicle(owner,true))	return;
+			if(Input.Down( InputButton.Attack2 ) && protect.InVehicle(owner,true))	return;
+
+
 			var eyePos = owner.EyePos;
 			var eyeRot = owner.EyeRot;
 			var eyeDir = owner.EyeRot.Forward;

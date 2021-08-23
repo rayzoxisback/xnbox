@@ -7,12 +7,14 @@
 
 		public override void Simulate()
 		{
-			if(protect.InVehicle(Owner)) return;
 			if ( !Host.IsServer )
 				return;
 
 			using ( Prediction.Off() )
 			{
+				if(Input.Pressed( InputButton.Attack1 ) && protect.InVehicle(Owner,true))	return;
+			  if(Input.Down( InputButton.Attack2 ) && protect.InVehicle(Owner,true))	return;
+				if(Input.Pressed( InputButton.Reload ) && protect.InVehicle(Owner,true))	return;
 				var startPos = Owner.EyePos;
 				var dir = Owner.EyeRot.Forward;
 
@@ -29,11 +31,10 @@
 				if ( tr.Entity is not Prop prop )
 					return;
 
-				if (! protect.SameOwner(Owner,tr.Entity ) )
-					return;
-
 				if ( Input.Pressed( InputButton.Attack1 ) )
 				{
+					if (! protect.SameOwner(Owner,tr.Entity ) )
+					return;
 					if ( prop.Root is not Prop rootProp )
 					{
 						return;
@@ -54,12 +55,16 @@
 				}
 				else if ( Input.Pressed( InputButton.Attack2 ) )
 				{
+					if (! protect.SameOwner(Owner,tr.Entity ) )
+					return;
 					prop.Unweld( true );
 
 					Reset();
 				}
 				else if ( Input.Pressed( InputButton.Reload ) )
 				{
+					if (! protect.SameOwner(Owner,tr.Entity ) )
+					return;
 					if ( prop.Root is not Prop rootProp )
 					{
 						return;

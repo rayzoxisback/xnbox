@@ -122,6 +122,14 @@ spawnmenu {
     }
 }
 
+.wip {
+    background-color: rgba(gray, 0.2);
+}
+
+button.wip {
+    background-color: gray;
+}
+
 .spawnpage {
     display: none;
     &.active {

@@ -7,7 +7,6 @@ namespace Sandbox.Tools
 	{
 		public override void Simulate()
 		{
-			if(protect.InVehicle(Owner)) return;
 			if ( !Host.IsServer )
 				return;
 
@@ -17,6 +16,9 @@ namespace Sandbox.Tools
 				var dir = Owner.EyeRot.Forward;
 
 				if ( !Input.Pressed( InputButton.Attack1 ) ) return;
+
+				if(Input.Pressed( InputButton.Attack1 ) && protect.InVehicle(Owner,true))	return;
+				if(Input.Down( InputButton.Attack2 ) && protect.InVehicle(Owner,true))	return;
 
 				var tr = Trace.Ray( startPos, startPos + dir * MaxTraceDistance )
 				   .Ignore( Owner )

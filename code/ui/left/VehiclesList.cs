@@ -12,7 +12,7 @@ public partial class VehiclesList : Panel
 	public bool isVehicle(Sandbox.LibraryAttribute x)
 	{
 		if (!x.Spawnable) return false;
-		if(!x.Name.StartsWith("ent_car")) return false;
+		if (!x.Name.StartsWith("ent_car_")) return false;
 		return true;
 	}
 

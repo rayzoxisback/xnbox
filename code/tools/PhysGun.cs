@@ -48,10 +48,16 @@ public partial class PhysGun : Carriable
 	public override void Simulate( Client client )
 	{
 		if ( Owner is not Player owner ) return;
-		if(protect.InVehicle(owner)) return;
 		var eyePos = owner.EyePos;
 		var eyeDir = owner.EyeRot.Forward;
 		var eyeRot = Rotation.From( new Angles( 0.0f, owner.EyeRot.Angles().yaw, 0.0f ) );
+
+		if(IsServer){
+			if(Input.Pressed( InputButton.Attack1 ) && protect.InVehicle(owner,true))	return;
+			if(Input.Down( InputButton.Attack2 ) && protect.InVehicle(owner,true))	return;
+			if(Input.Pressed( InputButton.Reload ) && protect.InVehicle(owner,true))	return;
+		}
+
 
 		if ( Input.Pressed( InputButton.Attack1 ) )
 		{
