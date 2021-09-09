@@ -189,3 +189,19 @@ Death {
 .dead {
     opacity: 1;
 }
+
+Construction {
+    z-index: -2;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 200px;
+    height: 200px;
+    & .CONSTRUCTION {
+        height: 100%;
+        width: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+}
