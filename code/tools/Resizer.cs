@@ -33,27 +33,32 @@ namespace Sandbox.Tools
 				   .HitLayer( CollisionLayer.Debris )
 				   .Run();
 
-				if ( !tr.Hit || !tr.Entity.IsValid() || tr.Entity.PhysicsGroup == null )
+				if ( !tr.Hit || !tr.Entity.IsValid() )
 					return;
 
-				// Disable resizing lights for now
-				if ( tr.Entity is LightEntity || tr.Entity is LampEntity )
+				var entity = tr.Entity.Root;
+				if ( !entity.IsValid() )
 					return;
 
 				if (! protect.SameOwner(Owner,tr.Entity, false, false ) )
 					return;
+				if ( entity.PhysicsGroup == null )
+					return;
 
-				var scale = reset ? 1.0f : Math.Clamp( tr.Entity.Scale + ((0.5f * Time.Delta) * resizeDir), 0.4f, 4.0f );
+				var scale = reset ? 1.0f : Math.Clamp( entity.Scale + ((0.5f * Time.Delta) * resizeDir), 0.4f, 4.0f );
 
-				if ( tr.Entity.Scale != scale )
+				if ( entity.Scale != scale )
 				{
-					tr.Entity.Scale = scale;
-					tr.Entity.PhysicsGroup.RebuildMass();
-					tr.Entity.PhysicsGroup.Wake();
+					entity.Scale = scale;
+					entity.PhysicsGroup.RebuildMass();
+					entity.PhysicsGroup.Wake();
 
-					foreach ( var child in tr.Entity.Children )
+					foreach ( var child in entity.Children )
 					{
 						if ( !child.IsValid() )
+							continue;
+
+						if ( child.PhysicsGroup == null )
 							continue;
 
 						child.PhysicsGroup.RebuildMass();
