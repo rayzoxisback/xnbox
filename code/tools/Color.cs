@@ -35,8 +35,8 @@ namespace Sandbox.Tools
 				if (! protect.SameOwner(Owner,tr.Entity ) )
 					return;
 
-				modelEnt.RenderColor = Color.Random.ToColor32();
-
+				modelEnt.RenderColor = Color.Random;
+				
 				CreateHitEffects( tr.EndPos );
 			}
 		}
