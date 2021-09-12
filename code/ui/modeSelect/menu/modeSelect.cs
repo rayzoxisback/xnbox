@@ -34,18 +34,18 @@ public partial class modeSelect : Panel
 		Inner = Add.Panel( "inner" );
 
 		pvp = Inner.Add.Button( "⚔️", () => PVP() );
-		pvp.Add.Label( "PVP MODE" );
+		pvp.Add.Label( "PVP MODE", "TEXT"  );
 		pvpLock = pvp.Add.Label( "" );
 		build = Inner.Add.Button( "🏗️", () => BUILD() );
-		build.Add.Label( "BUILD MODE" );
+		build.Add.Label( "BUILD MODE", "TEXT"  );
 		buildLock = build.Add.Label( "" );
 
 		propkill = Inner.Add.Button( "📦", () => PKSWITCH() );
-		propkillLabel = propkill.Add.Label();
+		propkillLabel = propkill.Add.Label("", "TEXT" );
 		propkillLock = propkill.Add.Label();
 
 		close = Inner.Add.Button( "❌", () => CLOSE() );
-		close.Add.Label( "FERMER" );
+		close.Add.Label( "FERMER", "TEXT" );
 		close.SetClass( "firstTime", true );
 
 	}

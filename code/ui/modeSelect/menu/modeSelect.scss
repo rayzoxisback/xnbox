@@ -57,7 +57,6 @@
         text-align: center;
         & label {
             font-weight: bold;
-            font-size: 75px;
         }
         & label:nth-child(2) {
             transition: all 250ms ease-in-out;
@@ -84,4 +83,8 @@
 
 .firstTime {
     display: none;
+}
+
+.TEXT {
+    font-size: 25px;
 }
