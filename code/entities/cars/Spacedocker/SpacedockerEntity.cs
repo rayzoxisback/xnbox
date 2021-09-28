@@ -342,7 +342,7 @@ public partial class SpacedockerEntity : Prop, IUse
 	float wheelAngle = 0.0f;
 	float wheelRevolute = 0.0f;
 
-	[Event.Frame]
+	[Event( "postview" )]
 	public void OnFrame()
 	{
 		wheelAngle = wheelAngle.LerpTo( CalculateTurnFactor( TurnDirection, Math.Abs( WheelSpeed ) ), 1.0f - MathF.Pow( 0.01f, Time.Delta ) );
