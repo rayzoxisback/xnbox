@@ -39,6 +39,7 @@ partial class SandboxPlayer
 		{
 			Inventory.Add( new SMG() );
 			Inventory.Add( new Shotgun() );
+			Inventory.Add( new Fists() );
 			Inventory.Add( new Pistol(), true );
 		}
 	}
